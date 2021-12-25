@@ -14,14 +14,21 @@ provider "aws" {
   region  = "us-east-1"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-0ed9277fb7eb570c9"
-  instance_type = "t2.micro"
+module "app_server" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 3.0"
+
+  name = "single-instance"
+
+  ami                    = "ami-0a1eddae0b7f0a79f"
+  instance_type          = "t4g.micro"
+  key_name               = "myuser"
+  monitoring             = true
+  vpc_security_group_ids = ["sg-05faf37a4f06f99e2"]
+  subnet_id              = "subnet-05569c915cff8df56"
 
   tags = {
-    Name = "ExampleAppServerInstance"
-    Team = "FlexTeam1"
-    Group = "CloudBaselineGroup"
+    Terraform   = "true"
+    Environment = "dev"
   }
 }
-
