@@ -24,7 +24,7 @@ module "app_server" {
   instance_type          = "t4g.micro"
   key_name               = "myuser"
   monitoring             = true
-  vpc_security_group_ids = ["sg-05faf37a4f06f99e2"]
+#   vpc_security_group_ids = ["sg-05faf37a4f06f99e2"]
   subnet_id              = "subnet-05569c915cff8df56"
 
   tags = {
